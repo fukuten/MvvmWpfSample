@@ -23,6 +23,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock
             Name="textBlock2"
@@ -69,6 +71,22 @@
             HorizontalAlignment="Right"
             Text="Phone" />
         <TextBlock
+            Name="textBlock10"
+            Grid.Row="4"
+            Grid.Column="0"
+            Height="23"
+            Margin="5"
+            HorizontalAlignment="Right"
+            Text="Hobbies" />
+        <TextBlock
+            Name="textBlock11"
+            Grid.Row="5"
+            Grid.Column="0"
+            Height="23"
+            Margin="5"
+            HorizontalAlignment="Right"
+            Text="New hobby" />
+        <TextBlock
             Name="CustomerIDTextBlock"
             Grid.Row="1"
             Grid.Column="1"
@@ -89,9 +107,23 @@
             Height="23"
             HorizontalAlignment="Left"
             Text="{Binding Path=CurrentCustomer.Phone, Mode=TwoWay}" />
+        <ListBox
+            Grid.Row="4"
+            Grid.Column="1"
+            Width="229"
+            Height="80"
+            HorizontalAlignment="Left"
+            ItemsSource="{Binding Path=CurrentCustomer.Hobbies}" />
+        <TextBox
+            Grid.Row="5"
+            Grid.Column="1"
+            Width="219"
+            Height="23"
+            HorizontalAlignment="Left"
+            Text="{Binding Path=CurrentCustomer.NewHobby, Mode=TwoWay}" />
         <Button
             Name="UpdateButton"
-            Grid.Row="4"
+            Grid.Row="6"
             Grid.Column="0"
             Width="75"
             Height="23"

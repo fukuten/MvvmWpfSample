@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -17,21 +18,52 @@ namespace MvvmWpfSample
         public string FullName { get; set; }
 
         public string Phone { get; set; }
+
+        public ObservableCollection<string> Hobbies { get; set; }
+
+        public string NewHobby { get; set; }
     }
 
     public class CustomerRepository
     {
         private readonly List<Customer> _customers = new List<Customer>
         {
-            new Customer(){ CustomerID = 1, FullName = "Dana Birkby", Phone = "394-555-0181" },
-            new Customer(){ CustomerID = 2, FullName = "Adriana Giorgi", Phone = "117-555-0119" },
-            new Customer(){ CustomerID = 3, FullName = "Wei Yu", Phone = "798-555-0118" }
+            new Customer
+            {
+                CustomerID = 1,
+                FullName = "Dana Birkby",
+                Phone = "394-555-0181",
+                Hobbies = new ObservableCollection<string>(new string[] { "Swimming", "Movie" }),
+                NewHobby = string.Empty
+            },
+            new Customer
+            {
+                CustomerID = 2,
+                FullName = "Adriana Giorgi",
+                Phone = "117-555-0119",
+                Hobbies = new ObservableCollection<string>(new string[] { "Sports", "Video Game", "Sweets" }),
+                NewHobby = string.Empty
+            },
+            new Customer
+            {
+                CustomerID = 3,
+                FullName = "Wei Yu",
+                Phone = "798-555-0118",
+                Hobbies = new ObservableCollection<string>(),
+                NewHobby = string.Empty
+            }
         };
 
         public List<Customer> GetCustomers() => _customers;
 
         public void UpdateCustomer(Customer selectedCustomer)
         {
+            if (!string.IsNullOrWhiteSpace(selectedCustomer.NewHobby))
+            {
+                selectedCustomer.Hobbies.Add(selectedCustomer.NewHobby);
+                selectedCustomer.NewHobby = string.Empty;
+            }
+
             Customer customerToChange = _customers.Single(c => c.CustomerID == selectedCustomer.CustomerID);
             customerToChange = selectedCustomer;
         }
